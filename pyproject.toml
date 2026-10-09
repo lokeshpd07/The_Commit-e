@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+# Run from the repo root: pytest
+testpaths = ["backend/tests"]
+pythonpath = ["."]          # makes `backend` importable as a package
+addopts = "-v --tb=short"
