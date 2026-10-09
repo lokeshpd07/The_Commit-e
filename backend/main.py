@@ -21,6 +21,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.api.routes.priorities import router as priorities_router
 from backend.api.routes.health import router as health_router
 from backend.api.routes.reports import router as reports_router
+from backend.api.routes.map_points import router as map_points_router
+from backend.api.routes.plans import router as plans_router
+from backend.api.routes.evaluation import router as evaluation_router
 from backend.db.session import engine
 from backend.models.base import Base
 
@@ -64,6 +67,9 @@ app.add_middleware(
 app.include_router(health_router, prefix="/api/v1")
 app.include_router(reports_router, prefix="/api/v1")
 app.include_router(priorities_router)
+app.include_router(map_points_router)
+app.include_router(plans_router)
+app.include_router(evaluation_router)
 
 # Note: The healthz endpoint from Member 2 is left intact.
 @app.get("/healthz", tags=["health"])
