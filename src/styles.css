@@ -1,0 +1,160 @@
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@source "../src";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Manrope', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--danger);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* White and Green Theme Design Tokens */
+:root {
+  --background: oklch(0.985 0.005 145);
+  --foreground: oklch(0.18 0.02 155);
+  --card: oklch(1 0 0);
+  --primary: oklch(0.55 0.17 155);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.965 0.02 155);
+  --muted: oklch(0.955 0.01 150);
+  --muted-foreground: oklch(0.50 0.025 155);
+  --accent: oklch(0.93 0.04 155);
+  --border: oklch(0.91 0.015 150);
+  --success: oklch(0.58 0.17 150);
+  --warning: oklch(0.72 0.16 75);
+  --danger: oklch(0.62 0.20 27);
+  --danger-soft: oklch(0.967 0.02 27);
+  --warning-soft: oklch(0.97 0.03 75);
+  --success-soft: oklch(0.96 0.035 155);
+  --map-surface: oklch(0.96 0.01 145);
+  --overlay: oklch(0.18 0.02 155 / 0.45);
+  --shadow: 0 10px 30px oklch(0.2 0.03 150 / 0.08);
+  --shadow-modal: 0 25px 80px oklch(0.18 0.03 150 / 0.2);
+  --sidebar-width: 240px;
+
+  /* Operations & Signal Tokens */
+  --signal-green: oklch(0.55 0.17 155);
+  --signal-blue: oklch(0.58 0.14 185);
+  --signal-amber: oklch(0.72 0.16 75);
+  --grid-line: oklch(0.55 0.15 155 / 0.07);
+}
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+  letter-spacing: 0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  background: var(--background);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Operations backdrop styling for white and green theme */
+.operations-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.operations-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.85;
+}
+
+.operations-roads {
+  position: absolute;
+  right: -20px;
+  top: -40px;
+  width: 55%;
+  height: 320px;
+  opacity: 0.65;
+  mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 1) 40%);
+}
+
+.operations-road-track {
+  fill: none;
+  stroke: oklch(0.55 0.17 155 / 0.2);
+  stroke-width: 2;
+}
+
+.operations-road-flow {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.flow-0 {
+  stroke: var(--signal-green);
+}
+.flow-1 {
+  stroke: var(--signal-blue);
+}
+.flow-2 {
+  stroke: var(--signal-amber);
+}
+
+.operations-node-ring {
+  fill: none;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Micro-animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

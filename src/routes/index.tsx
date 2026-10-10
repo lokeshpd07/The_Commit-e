@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import Roadway from '@/components/roadway';
+export const Route=createFileRoute('/')({head:()=>({meta:[{title:'Roadway — City Road Intelligence'},{name:'description',content:'Report potholes, prioritize critical road damage, and coordinate maintenance for safer city streets.'},{property:'og:title',content:'Roadway — City Road Intelligence'},{property:'og:description',content:'Every road. Under control. Community reporting and intelligent maintenance prioritization.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]}),component:Roadway});
