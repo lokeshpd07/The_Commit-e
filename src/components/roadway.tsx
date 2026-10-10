@@ -91,6 +91,11 @@ export default function Roadway() {
     if (role === 'admin') {
       setIsAdminAuthenticated(true);
     }
+    // Wipe all demo data so new profile has a completely clean slate
+    void apiClient.clearAllReports().then(() => {
+      qc.setQueryData(['reports'], []);
+      void qc.invalidateQueries({ queryKey: ['reports'] });
+    });
     setCurrentPage('dashboard');
   };
 
@@ -100,6 +105,11 @@ export default function Roadway() {
     if (role === 'admin') {
       setIsAdminAuthenticated(true);
     }
+    // Wipe all demo data so new profile has a completely clean slate
+    void apiClient.clearAllReports().then(() => {
+      qc.setQueryData(['reports'], []);
+      void qc.invalidateQueries({ queryKey: ['reports'] });
+    });
   };
 
   const handleNavigateToAuth = (role: 'citizen' | 'admin' = 'citizen', tab: 'login' | 'signup' = 'login') => {

@@ -30,6 +30,7 @@ import {
   Ruler,
   Car,
   Activity,
+  Trash2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -148,6 +149,17 @@ export function AdminOperationsDashboard({
     }
   };
 
+  const handlePurgeAllData = async () => {
+    try {
+      await apiClient.clearAllReports();
+      setPlanResult(null);
+      toast.success('All demo data erased. Admin portal reset to zero records.');
+      onRefresh();
+    } catch (e) {
+      toast.error('Failed to erase demo data');
+    }
+  };
+
   const handleStatusChange = async (reportId: string, newStatus: ReportStatus) => {
     try {
       await apiClient.updateReportStatus(reportId, newStatus);
@@ -244,6 +256,16 @@ export function AdminOperationsDashboard({
         </div>
 
         <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handlePurgeAllData}
+            className="h-8 text-xs border-red-200 bg-red-50 hover:bg-red-100 text-red-700 shadow-xs cursor-pointer"
+            title="Erase all demo records and reset portal to zero records"
+          >
+            <Trash2 size={12} className="mr-1.5 text-red-600" /> Erase Demo Data
+          </Button>
+
           <Button
             size="sm"
             variant="outline"

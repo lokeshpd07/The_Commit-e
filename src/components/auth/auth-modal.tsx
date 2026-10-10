@@ -50,6 +50,9 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
         });
         if (error) throw error;
         toast.success('Account created successfully! Signed in.');
+        const { apiClient } = await import('@/lib/api_client');
+        await apiClient.clearAllReports();
+        toast.info('All prior demo data erased. Fresh workspace initialized.');
         onSuccess(role, name || (role === 'admin' ? 'City Authority Staff' : 'Resident Citizen'));
         onClose();
       } else {

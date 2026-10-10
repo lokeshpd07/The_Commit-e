@@ -309,4 +309,8 @@ export const apiClient = {
       return mockApi.getEvaluationSummary(simulateUnavailable);
     }
   },
+
+  async clearAllReports(): Promise<void> {
+    mockApi.clearAllReports();
+  },
 };

@@ -81,6 +81,11 @@ export function AuthPage({
           toast.success(`Welcome to RoadSense AI, ${displayName}!`);
         }
 
+        // Erase any demo data so the new profile starts completely fresh
+        const { apiClient } = await import('@/lib/api_client');
+        await apiClient.clearAllReports();
+        toast.info('All prior demo data erased. Fresh workspace active.');
+
         onAuthSuccess(role, displayName, email.trim());
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({

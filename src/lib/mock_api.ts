@@ -497,11 +497,19 @@ export const mockApi = {
   },
 
   resetMockStore(): void {
-    mockReportsStore = [...MOCK_REPORTS];
+    mockReportsStore = [];
+  },
+
+  clearAllReports(): void {
+    mockReportsStore = [];
   },
 };
 
 export function resetMockStore(): void {
-  mockReportsStore = [...MOCK_REPORTS];
+  mockReportsStore = [];
+}
+
+export function clearAllReports(): void {
+  mockReportsStore = [];
 }
 
