@@ -168,8 +168,11 @@ export default function Roadway() {
 
   const handleSignOut = () => {
     setIsAdminAuthenticated(false);
+    setUserName('Resident Citizen');
+    setUserEmail('');
+    setActivePersona('citizen');
     setCurrentPage('landing');
-    toast.success('Signed out. Returned to Home Page.');
+    toast.success('Signed out successfully. Returned to Home Page.');
   };
 
   return (

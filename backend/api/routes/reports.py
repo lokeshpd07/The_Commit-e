@@ -226,3 +226,15 @@ def get_report(report_id: str):
             location=location,
             detections=detections
         )
+
+
+@router.delete("/purge", status_code=status.HTTP_200_OK)
+def purge_all_reports():
+    with SessionLocal() as db:
+        db.query(Assessment).delete()
+        db.query(Detection).delete()
+        db.query(DamageLocation).delete()
+        db.query(Report).delete()
+        db.commit()
+    return {"status": "ok", "message": "All reports purged"}
+

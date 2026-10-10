@@ -262,7 +262,10 @@ export const apiClient = {
       if (!response.ok) {
         return mockApi.getMapPoints();
       }
-      return await response.json();
+      const raw = await response.json();
+      if (Array.isArray(raw)) return raw;
+      if (raw && typeof raw === 'object' && Array.isArray(raw.data)) return raw.data;
+      return [];
     } catch (err: any) {
       return mockApi.getMapPoints();
     }
@@ -312,5 +315,11 @@ export const apiClient = {
 
   async clearAllReports(): Promise<void> {
     mockApi.clearAllReports();
+    const config = getConfig();
+    try {
+      await fetchWithTimeout(`${config.apiBaseUrl}/reports/purge`, { method: 'DELETE' });
+    } catch (e) {
+      // Backend offline or unreachable, mock store is already purged
+    }
   },
 };

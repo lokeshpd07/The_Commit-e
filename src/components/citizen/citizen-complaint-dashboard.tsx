@@ -134,9 +134,15 @@ export function CitizenComplaintDashboard({
   // Filter user's complaints
   const myComplaints = useMemo(() => {
     return safeReports.filter(
-      (r) => r.user_id === 'usr_resident_demo' || r.user_name?.includes('Resident') || r.is_demo
+      (r) =>
+        !userName ||
+        r.user_name === userName ||
+        (userName && r.user_name?.toLowerCase().includes(userName.toLowerCase())) ||
+        r.user_id === 'usr_resident_demo' ||
+        r.user_name?.includes('Resident') ||
+        safeReports.length === 1
     );
-  }, [safeReports]);
+  }, [safeReports, userName]);
 
   // Check for nearby duplicate reports (<0.004 deg approx 400m in Coimbatore)
   const nearbyDuplicate = useMemo(() => {
@@ -1043,7 +1049,14 @@ export function CitizenComplaintDashboard({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {safeReports.map((r) => (
+            {safeReports.length === 0 ? (
+              <div className="col-span-full p-8 text-center bg-white rounded-3xl border border-slate-200">
+                <p className="text-xs text-slate-500">
+                  No community complaints reported yet in Coimbatore. Be the first to register a road defect!
+                </p>
+              </div>
+            ) : (
+              safeReports.map((r) => (
               <div
                 key={r.report_id}
                 className="p-5 rounded-3xl border border-slate-200 bg-white shadow-sm space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow"
@@ -1101,7 +1114,7 @@ export function CitizenComplaintDashboard({
                   </Button>
                 </div>
               </div>
-            ))}
+            )))}
           </div>
         </div>
       )}

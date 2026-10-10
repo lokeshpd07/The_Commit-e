@@ -56,7 +56,7 @@ describe('RoadSense AI Frontend API Client & Mock System', () => {
     };
 
     const response = await apiClient.createReport(request);
-    expect(response.report_id).toMatch(/^RPT-/);
+    expect(response.report_id).toMatch(/^(RPT|#CCMC-)/);
     expect(response.severity).toBe('High');
     expect(response.priority_score).toBeGreaterThan(60);
     expect(response.detections.length).toBeGreaterThan(0);

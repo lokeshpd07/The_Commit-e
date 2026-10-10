@@ -193,7 +193,7 @@ export const mockApi = {
     });
 
     const nextNum = mockReportsStore.length + 101;
-    const reportId = `RPT-000${nextNum}`;
+    const reportId = `#CCMC-${1000 + nextNum}`;
 
     const costMap: Record<number, number> = { 1: 850, 2: 1800, 3: 3200 };
     const hoursMap: Record<number, number> = { 1: 1.2, 2: 2.5, 3: 4.5 };
